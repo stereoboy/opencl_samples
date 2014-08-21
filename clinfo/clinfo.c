@@ -4,6 +4,7 @@
 #include <CL/cl.h>
 
 #define MAX_PLATFORM_IDS 1024
+#define MAX_DEVICE_IDS 1024
 #define MAX_BUFFER_SIZE  1024
 
 #define CL_CHECK(X) 					\
@@ -17,7 +18,7 @@ int main(int argc, char* argv[])
 {
 	cl_platform_id platform_ids[MAX_PLATFORM_IDS];
 	cl_uint num_platform_ids;
-	cl_device_id device_ids[MAX_PLATFORM_IDS];
+	cl_device_id device_ids[MAX_DEVICE_IDS];
 	cl_uint num_device_ids;
 	cl_int ret;
 	char buffer[MAX_BUFFER_SIZE];
@@ -50,7 +51,7 @@ int main(int argc, char* argv[])
 		CL_CHECK(ret = clGetPlatformInfo(platform_ids[i], CL_PLATFORM_EXTENSIONS, MAX_BUFFER_SIZE, buffer, NULL));
 		fprintf(stderr, "CL_PLATFORM_EXTENSIONS = %s\n", buffer);
 #if 1
-		CL_CHECK(ret = clGetDeviceIDs(platform_ids[i], CL_DEVICE_TYPE_ALL, MAX_PLATFORM_IDS, device_ids, &num_device_ids));
+		CL_CHECK(ret = clGetDeviceIDs(platform_ids[i], CL_DEVICE_TYPE_ALL, MAX_DEVICE_IDS, device_ids, &num_device_ids));
 
 		fprintf(stderr, "\t");
 		fprintf(stderr, "num of device ids: %d\n", num_device_ids);
